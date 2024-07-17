@@ -9,7 +9,7 @@ public class NewPersonWindow extends JFrame {
     public NewPersonWindow(Graph graph) {
         this.graph = graph;
 
-        setTitle("Social Network Graph - New Person");
+        setTitle("New Person");
         setSize(300, 150);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -33,11 +33,24 @@ public class NewPersonWindow extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String name = nameField.getText().trim();
                 if (!name.isEmpty()) {
-                    graph.addPerson(name);
+
+                    if(!graph.personExists(name)){
+                        graph.addPerson(name);
                     JOptionPane.showMessageDialog(null, name + " added.");
+                        
+                        
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "Duplicate Entry.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                     new InitialWindow(graph).setVisible(true);
                     dispose();
-                } else {
+                    ///git test
+                } 
+                
+                
+
+                else {
                     JOptionPane.showMessageDialog(null, "Name cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
